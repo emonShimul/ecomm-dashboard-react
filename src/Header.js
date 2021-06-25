@@ -6,7 +6,7 @@ function Header() {
     const user = JSON.parse(localStorage.getItem('user-info'));
     function logout() {
         localStorage.clear();
-        history.push('/register');
+        history.push('/login');
     }
     return (
         <div>
@@ -30,13 +30,13 @@ function Header() {
                 </Nav>
 
                 {localStorage.getItem('user-info') ?
-                <Nav>
-                    <NavDropdown title={user && user.name}>
-                        <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
-                        <NavDropdown.Item>Profile</NavDropdown.Item>
-                    </NavDropdown>
-                </Nav>
-                :null}
+                    <Nav>
+                        <NavDropdown title={user && user.name}>
+                            <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
+                            <NavDropdown.Item>Profile</NavDropdown.Item>
+                        </NavDropdown>
+                    </Nav>
+                    : null}
             </Navbar>
         </div>
     )
