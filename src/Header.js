@@ -1,7 +1,13 @@
-import { Navbar, Nav } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
+import { Link, useHistory } from 'react-router-dom'
 
 function Header() {
+    const history = useHistory();
+    const user = JSON.parse(localStorage.getItem('user-info'));
+    function logout() {
+        localStorage.clear();
+        history.push('/register');
+    }
     return (
         <div>
             <Navbar bg="dark" variant="dark">
@@ -22,6 +28,15 @@ function Header() {
                     }
 
                 </Nav>
+
+                {localStorage.getItem('user-info') ?
+                <Nav>
+                    <NavDropdown title={user && user.name}>
+                        <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
+                        <NavDropdown.Item>Profile</NavDropdown.Item>
+                    </NavDropdown>
+                </Nav>
+                :null}
             </Navbar>
         </div>
     )
